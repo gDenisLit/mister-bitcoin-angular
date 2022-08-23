@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
-import { ContactService } from 'src/app/services/contact.service';
+import { ContactService } from 'src/app/services/contact/contact-service.service';
 
 @Component({
   selector: 'app-contact-edit',
@@ -33,7 +33,6 @@ export class ContactEditComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['contact/', this.contact._id? this.contact._id : ''])
+    this.router.navigateByUrl('/contact')
   }
-
 }

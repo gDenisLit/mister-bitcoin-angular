@@ -1,9 +1,9 @@
 <section class="login main-layout full">
-    <div class="login__inner flex-column-center">
-        <form class="login-form">
+    <div *ngIf="credentials" class="login__inner flex-column-center">
+        <form (ngSubmit)="onLogin()" class="login-form">
             <h2>Login</h2>
-            <input type="email" placeholder="Email" autofocus name="email" />
-            <input type="password" placeholder="Password" show-password="true" name="password" />
+            <input [(ngModel)]="credentials.username" type="text" placeholder="Username" autofocus name="username" />
+            <input [(ngModel)]="credentials.password" type="password" placeholder="Password" show-password="true" name="password" />
             <button class="login__btn">
                 <span>Login</span>
             </button>

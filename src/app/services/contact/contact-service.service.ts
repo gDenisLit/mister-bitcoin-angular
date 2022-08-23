@@ -1,10 +1,119 @@
 import { Injectable } from '@angular/core'
 import { Observable, BehaviorSubject, of, throwError } from 'rxjs'
-import { ContactFilter } from '../models/contact-filter.model'
-import { Contact } from '../models/contact.model'
+import { ContactFilter } from 'src/app/models/contact-filter.model'
+import { Contact } from 'src/app/models/contact.model'
 
 const CONTACT_KEY = 'contact_db'
 const CONTACTS = _loadContacts()
+
+@Injectable({
+    providedIn: 'root'
+})
+
+export class ContactService {
+
+    private _contactsDb: Contact[] = CONTACTS
+
+    private _contacts$ = new BehaviorSubject<Contact[]>([])
+    public contacts$ = this._contacts$.asObservable()
+
+    private _filterBy$ = new BehaviorSubject<ContactFilter>({ name: '' })
+    public filterBy$ = this._filterBy$.asObservable()
+
+    constructor() { }
+
+    public loadContacts(): void {
+        let contacts = this._contactsDb
+        const filterBy = this._filterBy$.getValue()
+
+        if (filterBy && filterBy.name) {
+            contacts = this._filter(contacts, filterBy.name)
+        }
+        this._contacts$.next(this._sort(contacts))
+    }
+
+    public setFilterBy(filterBy: ContactFilter): void {
+        this._filterBy$.next(filterBy)
+        this.loadContacts()
+    }
+
+    public getContactById(id: string): Observable<Contact> {
+        //mock the server work
+        const contact = this._contactsDb.find(contact => contact._id === id)
+
+        //return an observable
+        return contact ? of(contact) : throwError(() => `Contact id ${id} not found!`)
+    }
+
+    public deleteContact(id: string) {
+        //mock the server work
+        this._contactsDb = this._contactsDb.filter(contact => contact._id !== id)
+
+        // change the observable data in the service - let all the subscribers know
+        this._contacts$.next(this._contactsDb)
+        localStorage.setItem(CONTACT_KEY, JSON.stringify(this._contactsDb))
+    }
+
+    public saveContact(contact: Contact) {
+        return contact._id ? this._updateContact(contact) : this._addContact(contact)
+    }
+
+    public getEmptyContact(): Contact {
+        return {
+            name: '',
+            email: '',
+            phone: '',
+        }
+    }
+
+    private _updateContact(contact: Contact) {
+        //mock the server work
+        this._contactsDb = this._contactsDb.map(c => contact._id === c._id ? contact : c)
+        // change the observable data in the service - let all the subscribers know
+        this._contacts$.next(this._sort(this._contactsDb))
+        localStorage.setItem(CONTACT_KEY, JSON.stringify(this._contactsDb))
+    }
+
+    private _addContact(contact: Contact) {
+        //mock the server work
+        const newContact = new Contact(contact.name, contact.email, contact.phone)
+        if (typeof newContact.setId === 'function') newContact.setId(getRandomId())
+        this._contactsDb.push(newContact)
+        this._contacts$.next(this._sort(this._contactsDb))
+        localStorage.setItem(CONTACT_KEY, JSON.stringify(this._contactsDb))
+    }
+
+    private _sort(contacts: Contact[]): Contact[] {
+        return contacts.sort((a, b) => {
+            if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+                return -1
+            }
+            if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+                return 1
+            }
+            return 0
+        })
+    }
+
+    private _filter(contacts: Contact[], term: string) {
+        term = term.toLocaleLowerCase()
+        return contacts.filter(contact => {
+            return contact.name.toLocaleLowerCase().includes(term) ||
+                contact.phone.toLocaleLowerCase().includes(term) ||
+                contact.email.toLocaleLowerCase().includes(term)
+        })
+    }
+}
+
+function getRandomId(length = 8): string {
+    let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            characters.length))
+    }
+    return result
+}
 
 function _loadContacts(): Contact[] {
     let contacts: Contact[]
@@ -129,114 +238,5 @@ function _loadContacts(): Contact[] {
     ]
     localStorage.setItem(CONTACT_KEY, JSON.stringify(contacts))
     return contacts
-}
-
-@Injectable({
-    providedIn: 'root'
-})
-
-export class ContactService {
-
-    private _contactsDb: Contact[] = CONTACTS
-
-    private _contacts$ = new BehaviorSubject<Contact[]>([])
-    public contacts$ = this._contacts$.asObservable()
-
-    private _filterBy$ = new BehaviorSubject<ContactFilter>({ name: '' })
-    public filterBy$ = this._filterBy$.asObservable()
-
-    constructor() { }
-
-    public loadContacts(): void {
-        let contacts = this._contactsDb
-        const filterBy = this._filterBy$.getValue()
-
-        if (filterBy && filterBy.name) {
-            contacts = this._filter(contacts, filterBy.name)
-        }
-        this._contacts$.next(this._sort(contacts))
-    }
-
-    public setFilterBy(filterBy: ContactFilter): void {
-        this._filterBy$.next(filterBy)
-        this.loadContacts()
-    }
-
-    public getContactById(id: string): Observable<Contact> {
-        //mock the server work
-        const contact = this._contactsDb.find(contact => contact._id === id)
-
-        //return an observable
-        return contact ? of(contact) : throwError(() => `Contact id ${id} not found!`)
-    }
-
-    public deleteContact(id: string) {
-        //mock the server work
-        this._contactsDb = this._contactsDb.filter(contact => contact._id !== id)
-
-        // change the observable data in the service - let all the subscribers know
-        this._contacts$.next(this._contactsDb)
-        localStorage.setItem(CONTACT_KEY, JSON.stringify(this._contactsDb))
-    }
-
-    public saveContact(contact: Contact) {
-        return contact._id ? this._updateContact(contact) : this._addContact(contact)
-    }
-
-    public getEmptyContact(): Contact {
-        return {
-            name: '',
-            email: '',
-            phone: '',
-        }
-    }
-
-    private _updateContact(contact: Contact) {
-        //mock the server work
-        this._contactsDb = this._contactsDb.map(c => contact._id === c._id ? contact : c)
-        // change the observable data in the service - let all the subscribers know
-        this._contacts$.next(this._sort(this._contactsDb))
-        localStorage.setItem(CONTACT_KEY, JSON.stringify(this._contactsDb))
-    }
-
-    private _addContact(contact: Contact) {
-        //mock the server work
-        const newContact = new Contact(contact.name, contact.email, contact.phone)
-        if (typeof newContact.setId === 'function') newContact.setId(getRandomId())
-        this._contactsDb.push(newContact)
-        this._contacts$.next(this._sort(this._contactsDb))
-        localStorage.setItem(CONTACT_KEY, JSON.stringify(this._contactsDb))
-    }
-
-    private _sort(contacts: Contact[]): Contact[] {
-        return contacts.sort((a, b) => {
-            if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
-                return -1
-            }
-            if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
-                return 1
-            }
-            return 0
-        })
-    }
-
-    private _filter(contacts: Contact[], term: string) {
-        term = term.toLocaleLowerCase()
-        return contacts.filter(contact => {
-            return contact.name.toLocaleLowerCase().includes(term) ||
-                contact.phone.toLocaleLowerCase().includes(term) ||
-                contact.email.toLocaleLowerCase().includes(term)
-        })
-    }
-}
-
-function getRandomId(length = 8): string {
-    let result = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() *
-            characters.length))
-    }
-    return result
 }
 

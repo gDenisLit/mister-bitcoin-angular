@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ContactFilter } from 'src/app/models/contact-filter.model';
-import { ContactService } from 'src/app/services/contact.service';
+import { ContactService } from 'src/app/services/contact/contact-service.service';
 
 @Component({
   selector: 'contact-filter',
