@@ -2,5 +2,8 @@
     <div *ngIf="loggedInUser" class="home-page__inner">
         <h2>{{loggedInUser.username}}</h2>
         <p>{{loggedInUser.coins}}</p>
+        <section *ngIf="lastMoves">
+            <trans-list [lastMoves]="lastMoves"></trans-list>
+        </section >
     </div>
 </section>

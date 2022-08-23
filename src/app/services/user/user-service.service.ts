@@ -31,7 +31,6 @@ export class UserService {
       user = this._userDb.find(u => u._id === id)
       if (user) this._loggedInUser$.next(user)
     }
-    console.log('getting loggedinuser', user)
     return user
   }
 

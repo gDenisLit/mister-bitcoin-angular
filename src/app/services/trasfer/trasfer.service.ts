@@ -14,16 +14,8 @@ export class TrasferService {
   ) { }
 
   transferCoins(transfer: Transfer): void {
-    const loggedInUser: User | void= this.userService.getLoggedinUser() 
-    console.log('transfering from', loggedInUser)
-    if (!loggedInUser) return
-
-    const {_id} = loggedInUser
-    if (!_id) return
-
-    console.log('from user', loggedInUser)
     const date: number = Date.now()
-    const newTransfer: Transfer = new Transfer(_id, transfer.toContactId, transfer.amount, date)
+    const newTransfer: Transfer = new Transfer(transfer.fromUser, transfer.toContact, transfer.amount, date)
     if (typeof newTransfer.setId === 'function') newTransfer.setId(getRandomId())
     this.userService.setNewMove(newTransfer)
   }

@@ -13,9 +13,7 @@ export class AppHeaderComponent implements OnInit {
   @Input() loggedInUser!: User | void
   @Output() logout = new EventEmitter<string>()
 
-  ngOnInit(): void {
-    console.log('header', this.loggedInUser)
-  }
+  ngOnInit(): void { }
 
   onLogout() {
     this.logout.emit()

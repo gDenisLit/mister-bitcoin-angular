@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { Transfer } from 'src/app/models/trasfer.model';
+import { User } from 'src/app/models/user-model';
 import { ContactService } from 'src/app/services/contact/contact-service.service';
 import { TrasferService } from 'src/app/services/trasfer/trasfer.service';
+import { UserService } from 'src/app/services/user/user-service.service';
 
 @Component({
   selector: 'contact-details-page',
@@ -15,17 +17,14 @@ export class ContactDetailsPageComponent implements OnInit {
 
   constructor(
     private contactService: ContactService,
+    private userService: UserService,
     private trasferService: TrasferService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   contact!: Contact
-  transfer: Transfer = {
-    fromUserId: '',
-    toContactId: '',
-    amount: 0,
-  }
+  amount: number = 0
 
   ngOnInit(): void {
     this.route.params.subscribe(async ({ id }) => {
@@ -41,17 +40,23 @@ export class ContactDetailsPageComponent implements OnInit {
   }
 
   onTrasfer(): void {
-    const transfer: Transfer = this.transfer
+    const user: User | void = this.userService.getLoggedinUser()
+    if (!user) return
     const contact: Contact = this.contact
     if (!contact._id) {
       console.log('cant send to null')
       return
     }
-    if (!transfer.amount) {
+    if (!this.amount) {
       console.log('cant send 0')
       return
     }
-    transfer.toContactId = contact._id
+    const transfer: Transfer = {
+      fromUser: user,
+      toContact: contact,
+      amount: this.amount,
+    }
+
     this.trasferService.transferCoins(transfer)
   }
 }

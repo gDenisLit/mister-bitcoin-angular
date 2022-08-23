@@ -1,11 +1,14 @@
+import { Contact } from "./contact.model";
+import { User } from "./user-model";
+
 export class Transfer {
 
     constructor(
-        public fromUserId: string,
-        public toContactId: string,
+        public fromUser: User,
+        public toContact: Contact,
         public amount: number,
         public sentAt?: number,
-        public _id?: string
+        public _id?: string,
     ){}
         
     setId?(id: string = 'r101') {

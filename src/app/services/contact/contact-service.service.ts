@@ -42,6 +42,7 @@ export class ContactService {
         const contact = this._contactsDb.find(contact => contact._id === id)
 
         //return an observable
+        console.log('getting contact', contact)
         return contact ? of(contact) : throwError(() => `Contact id ${id} not found!`)
     }
 
