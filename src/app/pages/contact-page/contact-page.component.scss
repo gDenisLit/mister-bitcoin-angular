@@ -1,0 +1,17 @@
+@import '../../../styles.scss';
+
+.contact-page {
+    height: 80vh;
+
+    &__inner {
+
+        .container {
+            padding: rem(30px);
+            background-color: $light-color2;
+
+            h3 {
+                margin-block-end: rem(10px);
+            }
+        }
+    }
+}

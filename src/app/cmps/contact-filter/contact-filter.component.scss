@@ -1,0 +1,16 @@
+@import '../../../styles.scss';
+
+.contact-filter {
+    width: 100%;
+    margin-block-end: rem(10px);
+
+    input {
+        padding: rem(12px);
+        width: 100%;
+        max-width: rem(300px);
+
+        &::placeholder {
+            text-transform: capitalize;
+        }
+    }
+}

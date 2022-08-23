@@ -1,0 +1,10 @@
+@import '../../../styles.scss';
+
+.contact-list {
+    max-width: fit-content;
+    padding-right: rem(10px);
+    align-items: flex-start;
+    gap: rem(10px);
+    height: rem(400px);
+    overflow-y: scroll;
+}

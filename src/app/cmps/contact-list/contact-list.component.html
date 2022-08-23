@@ -1,1 +1,7 @@
-<p>contact-list works!</p>
+<ul class='contact-list clean-list flex flex-column'>
+    <li class='contact-preview flex items-center'
+        *ngFor="let contact of contacts"
+    >
+        <contact-preview [contact]="contact"></contact-preview>
+    </li>
+</ul>

@@ -1,0 +1,29 @@
+@import '../../../styles.scss';
+
+.contact-preview {
+    background-color: $light-color4;
+    width: rem(300px);
+    padding: rem(10px);
+    position: relative;
+    cursor: pointer;
+
+    img {
+        max-width: rem(50px);
+        border-radius: 50%;
+        background-color: $light-color;
+        margin-inline-end: rem(10px);
+    }
+
+    .link-details {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:hover::after {
+            content: '  →';
+
+        }
+    }
+}
