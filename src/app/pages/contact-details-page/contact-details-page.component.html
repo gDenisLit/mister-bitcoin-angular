@@ -6,5 +6,9 @@
         <p>{{contact.phone}}</p>
         <a routerLink="/edit/{{contact._id}}">Edit</a>
         <button (click)="onRemoveContact()">Remove contact</button>
+        <form (ngSubmit)="onTrasfer()" class="trasfer">
+            <input [(ngModel)]="transfer.amount" type="number" name="coins" id="coins">
+            <button>Trasfer coins</button>
+        </form>
     </div>
 </section>

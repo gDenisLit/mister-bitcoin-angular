@@ -1,4 +1,4 @@
 <section>
-    <app-header></app-header>
+    <app-header (logout)="onLogout()" [loggedInUser]="loggedInUser"></app-header>
     <router-outlet></router-outlet>
 </section>

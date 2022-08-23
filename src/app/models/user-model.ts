@@ -1,11 +1,11 @@
-import { Move } from "./move-model"
+import { Transfer } from "./trasfer.model";
 
 export class User {
     constructor(
         public username: string,
         public password: string,
         public coins: number ,
-        public moves: Move[],
+        public moves: Array<Transfer>,
         public _id?: string
     ) { }
 

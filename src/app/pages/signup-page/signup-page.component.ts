@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user/user-service.service';
   templateUrl: './signup-page.component.html',
   styleUrls: ['./signup-page.component.scss']
 })
+
 export class SignupPageComponent {
 
   constructor(

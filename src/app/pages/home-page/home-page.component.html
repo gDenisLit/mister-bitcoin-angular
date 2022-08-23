@@ -1,1 +1,6 @@
-<p>home-page works!</p>
+<section class="home-page main-layout full">
+    <div *ngIf="loggedInUser" class="home-page__inner">
+        <h2>{{loggedInUser.username}}</h2>
+        <p>{{loggedInUser.coins}}</p>
+    </div>
+</section>
