@@ -1,3 +1,9 @@
 <form class='contact-filter flex'>
-    <input type="search" placeholder='Search' />
+    <input 
+        [(ngModel)]="filterBy.name" 
+        name="name" 
+        type="search" 
+        placeholder='Search' 
+        (ngModelChange)="onChangeFilter()"    
+    />
 </form>

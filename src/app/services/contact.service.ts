@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core'
 import { Observable, BehaviorSubject, of, throwError } from 'rxjs'
+import { ContactFilter } from '../models/contact-filter.model'
 import { Contact } from '../models/contact.model'
 
 const CONTACT_KEY = 'contact_db'
 const CONTACTS = _loadContacts()
 
-function _loadContacts() : Contact[] {
+function _loadContacts(): Contact[] {
     let contacts: Contact[]
     const data = localStorage.getItem(CONTACT_KEY)
     if (data) contacts = JSON.parse(data)
-    else contacts =  [
+    else contacts = [
         {
             "_id": "5a56640269f443a5d64b32ca",
             "name": "Ochoa Hyde",
@@ -90,7 +91,7 @@ function _loadContacts() : Contact[] {
         },
         {
             "_id": "5a56640298ab77236845b82b",
-    
+
             "name": "Glenna Santana",
             "email": "glennasantana@renovize.com",
             "phone": "+1 (860) 467-2376"
@@ -141,17 +142,25 @@ export class ContactService {
     private _contacts$ = new BehaviorSubject<Contact[]>([])
     public contacts$ = this._contacts$.asObservable()
 
-    constructor() {
-    }
+    private _filterBy$ = new BehaviorSubject<ContactFilter>({ name: '' })
+    public filterBy$ = this._filterBy$.asObservable()
 
-    public loadContacts(filterBy: { term: string }): void {
+    constructor() { }
+
+    public loadContacts(): void {
         let contacts = this._contactsDb
-        if (filterBy && filterBy.term) {
-            contacts = this._filter(contacts, filterBy.term)
+        const filterBy = this._filterBy$.getValue()
+
+        if (filterBy && filterBy.name) {
+            contacts = this._filter(contacts, filterBy.name)
         }
         this._contacts$.next(this._sort(contacts))
     }
 
+    public setFilterBy(filterBy: ContactFilter): void {
+        this._filterBy$.next(filterBy)
+        this.loadContacts()
+    }
 
     public getContactById(id: string): Observable<Contact> {
         //mock the server work

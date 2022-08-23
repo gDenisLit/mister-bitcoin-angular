@@ -14,7 +14,7 @@ export class ContactPageComponent implements OnInit {
   contacts$!: Observable<Contact[]>
 
   ngOnInit(): void {
-    this.contactService.loadContacts({ term: '' })
+    this.contactService.loadContacts()
     this.contacts$ = this.contactService.contacts$
   }
 

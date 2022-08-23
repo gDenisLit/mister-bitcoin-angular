@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ContactFilter } from 'src/app/models/contact-filter.model';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'contact-filter',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
+
+  filterBy!: ContactFilter
+  subscription!: Subscription
 
   ngOnInit(): void {
+    this.subscription = this.contactService.filterBy$.subscribe(filterBy => {
+      this.filterBy = filterBy
+    })
   }
 
+  onChangeFilter(): void {
+    this.contactService.setFilterBy(this.filterBy)
+  }
 }
