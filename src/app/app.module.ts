@@ -9,6 +9,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
+import { AppHeaderComponent } from './cmps/app-header/app-header.component';
+import { ContactFilterComponent } from './cmps/contact-filter/contact-filter.component';
+import { ContactListComponent } from './cmps/contact-list/contact-list.component';
+import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { StatisticPageComponent } from './pages/statistic-page/statistic-page.co
     HomePageComponent,
     LoginPageComponent,
     SignupPageComponent,
-    StatisticPageComponent
+    StatisticPageComponent,
+    AppHeaderComponent,
+    ContactFilterComponent,
+    ContactListComponent,
+    ContactPreviewComponent
   ],
   imports: [
     BrowserModule,
