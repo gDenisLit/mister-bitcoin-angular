@@ -8,12 +8,12 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component'
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component'
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: 'contact/:id', component: ContactDetailsPageComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
   { path: 'statistic', component: StatisticPageComponent },
-  { path: 'details', component: ContactDetailsPageComponent },
+  { path: '', component: HomePageComponent },
 ]
 
 @NgModule({

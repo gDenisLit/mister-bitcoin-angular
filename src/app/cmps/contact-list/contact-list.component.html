@@ -1,7 +1,6 @@
 <ul class='contact-list clean-list flex flex-column'>
-    <li class='contact-preview flex items-center'
-        *ngFor="let contact of contacts"
-    >
-        <contact-preview [contact]="contact"></contact-preview>
-    </li>
+    <contact-preview 
+        *ngFor="let contact of contacts" 
+        [contact]="contact"
+    ></contact-preview>
 </ul>

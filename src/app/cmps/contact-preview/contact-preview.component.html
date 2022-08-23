@@ -1,5 +1,11 @@
-<!-- <img src={imgUrl} alt="" /> -->
-<div class='flex flex-column'>
-    <h2>{{contact.name}}</h2>
-    <a [routerLink]="" class="link-details">View profile</a>
-</div>
+<li class='contact-preview flex items-center'>
+    <img src="https://robohash.org/{{contact._id}}" alt="c" />
+    <div class='flex flex-column'>
+        <h2>{{contact.name}}</h2>
+        <a 
+            routerLink="/contact/{{contact._id}}" 
+            class="link-details"
+        >View profile
+        </a>
+    </div>
+</li>
