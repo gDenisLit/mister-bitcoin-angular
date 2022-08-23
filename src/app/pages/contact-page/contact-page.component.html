@@ -2,6 +2,7 @@
     <div class="contact-page__inner flex-column-center">
         <div class="container">
             <h3>Find someone to trade with</h3>
+            <a routerLink="/edit">Add new contact</a>
             <contact-filter></contact-filter>
             <contact-list [contacts]="contacts$ | async"></contact-list>
         </div>

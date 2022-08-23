@@ -4,5 +4,7 @@
         <h2>{{contact.name}}</h2>
         <p>{{contact.email}}</p>
         <p>{{contact.phone}}</p>
+        <a routerLink="/edit/{{contact._id}}">Edit</a>
+        <button (click)="onRemoveContact()">Remove contact</button>
     </div>
 </section>

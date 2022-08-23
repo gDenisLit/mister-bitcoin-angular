@@ -1,0 +1,18 @@
+<section *ngIf="contact" class="contact-edit main-layout full">
+    <div class="contact-edit__inner flex-column-center">
+        <h2>{{contact._id ? 'Edit':'Add'}} contact</h2>
+        <form class="flex-column-center" (ngSubmit)="onSavecontact()">
+            <label for="name">Name: </label>
+            <input [(ngModel)]="contact.name" type="text" name="name" id="name">
+
+            <label for="email">email: </label>
+            <input [(ngModel)]="contact.email" type="email" name="email" id="email">
+
+            <label for="phone">Phone: </label>
+            <input [(ngModel)]="contact.phone" type="phone" name="phone" id="phone">
+
+            <button>Save</button>
+        </form>
+        <button (click)="goBack()">Back</button>
+    </div>
+</section>

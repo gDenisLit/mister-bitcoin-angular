@@ -26,4 +26,9 @@ export class ContactDetailsPageComponent implements OnInit {
     })
   }
 
+  onRemoveContact() : void {
+    if (!this.contact._id) return
+    this.contactService.deleteContact(this.contact._id)
+    this.router.navigate(['/contact'])
+  }
 }

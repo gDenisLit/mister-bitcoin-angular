@@ -6,8 +6,11 @@ import { HomePageComponent } from './pages/home-page/home-page.component'
 import { LoginPageComponent } from './pages/login-page/login-page.component'
 import { SignupPageComponent } from './pages/signup-page/signup-page.component'
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component'
+import { ContactEditComponent } from './pages/contact-edit/contact-edit.component'
 
 const routes: Routes = [
+  { path: 'edit/:id', component: ContactEditComponent },
+  { path: 'edit', component: ContactEditComponent },
   { path: 'contact/:id', component: ContactDetailsPageComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'login', component: LoginPageComponent },

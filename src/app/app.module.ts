@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core'
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -13,6 +14,7 @@ import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { ContactFilterComponent } from './cmps/contact-filter/contact-filter.component';
 import { ContactListComponent } from './cmps/contact-list/contact-list.component';
 import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.component';
+import { ContactEditComponent } from './pages/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,13 @@ import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.
     AppHeaderComponent,
     ContactFilterComponent,
     ContactListComponent,
-    ContactPreviewComponent
+    ContactPreviewComponent,
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
