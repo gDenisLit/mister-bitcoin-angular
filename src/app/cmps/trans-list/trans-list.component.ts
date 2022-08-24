@@ -10,7 +10,7 @@ export class TransListComponent implements OnInit {
 
   constructor() { }
 
-  @Input() lastMoves!: Transfer[]
+  @Input() moves!: Transfer[]
   ngOnInit(): void {
     
   }

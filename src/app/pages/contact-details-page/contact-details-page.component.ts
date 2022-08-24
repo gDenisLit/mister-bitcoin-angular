@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { Transfer } from 'src/app/models/trasfer.model';
 import { User } from 'src/app/models/user-model';
@@ -24,13 +24,26 @@ export class ContactDetailsPageComponent implements OnInit {
   ) { }
 
   contact!: Contact
+  loggedInUser!: User
+  subscription!: Subscription
   amount: number = 0
+  movesToContact!: Transfer[]
 
   ngOnInit(): void {
+    this.userService.getLoggedinUser()
+    this.subscription = this.userService.loggedInUser$.subscribe(loggedInUser => {
+      this.loggedInUser = loggedInUser
+    })
     this.route.params.subscribe(async ({ id }) => {
       const contact = await lastValueFrom(this.contactService.getContactById(id))
-      if (contact) this.contact = contact
+      if (contact) {
+        this.contact = contact
+        const moves = this.loggedInUser.moves
+          .filter(move => move.toContact._id === this.contact._id)
+        this.movesToContact = moves
+      }
     })
+
   }
 
   onRemoveContact(): void {
