@@ -40,23 +40,6 @@ export class ContactDetailsPageComponent implements OnInit {
   }
 
   onTrasfer(): void {
-    const user: User | void = this.userService.getLoggedinUser()
-    if (!user) return
-    const contact: Contact = this.contact
-    if (!contact._id) {
-      console.log('cant send to null')
-      return
-    }
-    if (!this.amount) {
-      console.log('cant send 0')
-      return
-    }
-    const transfer: Transfer = {
-      fromUser: user,
-      toContact: contact,
-      amount: this.amount,
-    }
-
-    this.trasferService.transferCoins(transfer)
+    this.trasferService.transferCoins(this.contact, this.amount)
   }
 }

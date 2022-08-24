@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { Credentials } from 'src/app/models/credentials.model';
 import { Transfer } from 'src/app/models/trasfer.model';
 import { User } from 'src/app/models/user-model';
 
-const USER_KEY = 'user_db'
-const LOGGEDIN = 'logged_in_user'
-const USER = _loadUsers()
+const USER_KEY: string = 'user_db'
+const LOGGEDIN: string = 'logged_in_user'
+const USER: User[] = _loadUsers()
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +51,7 @@ export class UserService {
     if (typeof user.setId === 'function') user.setId(getRandomId())
     this._userDb.push(user)
     this._users$.next(this._userDb)
-    localStorage.setItem(USER_KEY, JSON.stringify(this._userDb))
+    this._saveUsers([...this._userDb])
     this.login(credentials)
   }
 
@@ -61,18 +61,22 @@ export class UserService {
   }
 
   public setNewMove(transfer: Transfer): void {
-    const user = this._loggedInUser$.getValue()
-    if (!user) return
-    user.coins -= transfer.amount
-    user.moves.unshift(transfer)
-    const users = this._userDb
-    const idx = users.findIndex(u => u._id === user._id)
-    if (!idx) console.log('User Service: Failed to set new move')
-    
-    users.splice(idx, 1, user)
-    this._users$.next(users)
+    const loggedInUser = this._loggedInUser$.getValue()
+    if (!loggedInUser) return
+    if (loggedInUser.coins - transfer.amount < 0) {
+      console.log('no sufficient funds')
+      return
+    }
+    loggedInUser.moves.unshift(transfer)
+    loggedInUser.coins -= transfer.amount
+    const idx = this._userDb.findIndex(u => u._id === loggedInUser._id)
+    this._userDb.splice(idx, 1, loggedInUser)
+    this._users$.next([...this._userDb])
+    this._saveUsers([...this._userDb])
+  }
+
+  private _saveUsers(users: User[]): void {
     localStorage.setItem(USER_KEY, JSON.stringify(users))
-    this.getLoggedinUser()
   }
 }
 

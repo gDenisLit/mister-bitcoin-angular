@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { lastValueFrom, Observable, Subscription } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
-import { Move } from 'src/app/models/move-model';
 import { Transfer } from 'src/app/models/trasfer.model';
 import { User } from 'src/app/models/user-model';
 import { ContactService } from 'src/app/services/contact/contact-service.service';
@@ -24,7 +23,6 @@ export class HomePageComponent implements OnInit {
   lastMoves!: Transfer[]
 
   ngOnInit(): void {
-    console.log('homepage')
     this.userService.getLoggedinUser()
     this.subscription = this.userService.loggedInUser$.subscribe(loggedInUser => {
       this.loggedInUser = loggedInUser

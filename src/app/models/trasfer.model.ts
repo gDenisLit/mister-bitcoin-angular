@@ -4,7 +4,6 @@ import { User } from "./user-model";
 export class Transfer {
 
     constructor(
-        public fromUser: User,
         public toContact: Contact,
         public amount: number,
         public sentAt?: number,

@@ -13,7 +13,6 @@ export class TransPreviewComponent implements OnInit {
   @Input() move!: Transfer
   
   ngOnInit(): void {
-    console.log(this.move)
   }
 
 }

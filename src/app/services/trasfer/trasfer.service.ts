@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { Contact } from 'src/app/models/contact.model';
 import { Transfer } from 'src/app/models/trasfer.model';
 import { User } from 'src/app/models/user-model';
 import { UserService } from '../user/user-service.service';
@@ -13,9 +14,9 @@ export class TrasferService {
     private userService: UserService
   ) { }
 
-  transferCoins(transfer: Transfer): void {
+  transferCoins(contact: Contact, amount: number): void {
     const date: number = Date.now()
-    const newTransfer: Transfer = new Transfer(transfer.fromUser, transfer.toContact, transfer.amount, date)
+    const newTransfer: Transfer = new Transfer(contact, amount, date)
     if (typeof newTransfer.setId === 'function') newTransfer.setId(getRandomId())
     this.userService.setNewMove(newTransfer)
   }
