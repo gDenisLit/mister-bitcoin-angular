@@ -31,8 +31,4 @@ export class ContactEditComponent implements OnInit {
     this.contactService.saveContact(this.contact)
     this.router.navigateByUrl('/contact')
   }
-
-  goBack() {
-    this.router.navigateByUrl('/contact')
-  }
 }

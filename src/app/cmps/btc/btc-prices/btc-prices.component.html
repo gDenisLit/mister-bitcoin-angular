@@ -1,0 +1,6 @@
+<ul class="btc-prices-list clean-list flex">
+    <li *ngFor="let data of priceData" class="btc-price">
+        <h3>{{data.title}}</h3>
+        <p>{{data.val | currency}}</p>
+    </li>
+</ul>

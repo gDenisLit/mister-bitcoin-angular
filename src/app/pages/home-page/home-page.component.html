@@ -1,9 +1,23 @@
 <section class="home-page main-layout full">
-    <div *ngIf="loggedInUser" class="home-page__inner">
-        <h2>{{loggedInUser.username}}</h2>
-        <p>{{loggedInUser.coins}}</p>
-        <section *ngIf="lastMoves">
-            <trans-list [moves]="lastMoves"></trans-list>
-        </section >
+    <div class="home-page__inner">
+        <section class="wrapper w1">
+            <div *ngIf="loggedInUser._id">
+                <h2>Welcome back {{loggedInUser.username}}</h2>
+                <p>Balance: ${{loggedInUser.coins}}</p>
+            </div>
+            <div *ngIf="!loggedInUser._id">
+                <h2>Hello!</h2>
+                <a routerLink="/login">Login to check your wallet</a>
+            </div>
+        </section>
+        <section class="wrapper w2 flex">
+            <div class="chart-container">
+                <line-chart [data]="chartData" [options]="chartOptions"></line-chart>
+            </div>
+            <btc-prices [priceData]="priceData"></btc-prices>
+            <section *ngIf="lastMoves">
+                <trans-list [moves]="lastMoves"></trans-list>
+            </section>
+        </section>
     </div>
 </section>

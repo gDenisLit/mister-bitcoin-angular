@@ -4,13 +4,30 @@
     height: 80vh;
 
     &__inner {
+        h2 {
+            margin-block-end: rem(10px);
+        }
 
         .container {
-            padding: rem(30px);
-            background-color: $light-color2;
 
-            h3 {
+            .filter-container {
+                gap: rem(5px);
                 margin-block-end: rem(10px);
+                justify-content: space-between;
+    
+                a {
+                    background-color: $primary-color;
+                    color: $light-color;
+                    padding: rem(5px) rem(20px);
+                    border: 1px solid transparent;
+                    
+                    &:hover {
+                        background-color: $light-color;
+                        color: $primary-color;
+                        border-color: $primary-color;
+                        font-family: 700;
+                    }
+                }
             }
         }
     }

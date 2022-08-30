@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app-root/app.component';
@@ -17,6 +21,10 @@ import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.
 import { ContactEditComponent } from './pages/contact-edit/contact-edit.component';
 import { TransListComponent } from './cmps/trans-list/trans-list.component';
 import { TransPreviewComponent } from './cmps/trans-preview/trans-preview.component';
+import { NgChartsModule } from 'ng2-charts';
+import { LineChartComponent } from './cmps/chart/line-chart/line-chart.component';
+import { BtcPricesComponent } from './cmps/btc/btc-prices/btc-prices.component';
+
 
 @NgModule({
   declarations: [
@@ -33,12 +41,19 @@ import { TransPreviewComponent } from './cmps/trans-preview/trans-preview.compon
     ContactPreviewComponent,
     ContactEditComponent,
     TransListComponent,
-    TransPreviewComponent
+    TransPreviewComponent,
+    LineChartComponent,
+    BtcPricesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
+    HttpClientModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
-<li *ngIf="move" class="transfer-preview">
-    <p>{{move.toContact.name}}</p>
-    <p>{{move.amount}}</p>
+<li *ngIf="move" class="transfer-preview flex-column">
+    <p>To: {{move.toContact.name}}</p>
+    <p>Amount: {{move.amount}}</p>
+    <p>Date: {{move.sentAt | date}}</p>
 </li>

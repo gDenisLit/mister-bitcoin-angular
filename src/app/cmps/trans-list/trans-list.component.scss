@@ -1,0 +1,10 @@
+@import '../../../styles.scss';
+
+.transfer-list {
+    height: 100%;
+    gap: rem(5px);
+    border: rem(1px) solid $primary-color;
+    padding: rem(10px);
+    padding-right: rem(10px);
+    border-radius: rem(10px);
+}

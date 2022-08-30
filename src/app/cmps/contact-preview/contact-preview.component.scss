@@ -1,13 +1,14 @@
 @import '../../../styles.scss';
 
 .contact-preview {
-    background-color: $light-color4;
+    background-color: $light-color;
     width: rem(300px);
     padding: rem(10px);
     position: relative;
     cursor: pointer;
-
+    
     img {
+        border: 1px solid $primary-color;
         max-width: rem(50px);
         border-radius: 50%;
         background-color: $light-color;

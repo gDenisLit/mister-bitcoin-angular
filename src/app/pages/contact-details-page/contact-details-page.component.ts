@@ -26,8 +26,7 @@ export class ContactDetailsPageComponent implements OnInit {
   contact!: Contact
   loggedInUser!: User
   subscription!: Subscription
-  amount: number = 0
-  movesToContact!: Transfer[]
+  amount!: number
 
   ngOnInit(): void {
     this.userService.getLoggedinUser()
@@ -36,14 +35,13 @@ export class ContactDetailsPageComponent implements OnInit {
     })
     this.route.params.subscribe(async ({ id }) => {
       const contact = await lastValueFrom(this.contactService.getContactById(id))
-      if (contact) {
-        this.contact = contact
-        const moves = this.loggedInUser.moves
-          .filter(move => move.toContact._id === this.contact._id)
-        this.movesToContact = moves
-      }
+      if (contact) this.contact = contact
     })
+  }
 
+  get movesToContact(): Transfer[] {
+    return this.loggedInUser.moves
+      .filter(move => move.toContact._id === this.contact._id)
   }
 
   onRemoveContact(): void {

@@ -1,0 +1,18 @@
+@import '../../../styles.scss';
+
+.home-page {
+    &__inner {
+        .wrapper.w1 {
+            margin-block-end: rem(20px);
+        }
+        .wrapper.w2 {
+            gap: rem(20px);
+            .chart-container {
+                flex-basis: 70%;
+                background-color: $primary-color;
+                border-radius: rem(10px);
+                padding: rem(20px);
+            }
+        }
+    }
+}

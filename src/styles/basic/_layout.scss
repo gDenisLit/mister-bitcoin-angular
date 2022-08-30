@@ -1,6 +1,6 @@
 .main-layout {
     display: grid;
-    grid-template-columns: 10px 1fr 10px;
+    grid-template-columns: 50px 1fr 10px;
     padding-top: rem(100px);
 
     >*{
@@ -12,27 +12,29 @@
     }
 
     @include for-small-layout {
-        grid-template-columns: 220px 600px 1fr;
+        grid-template-columns: 220px 1fr 50px;
     }
 
     @include for-medium-layout {
-        grid-template-columns: 220px 800px 1fr;
+        grid-template-columns: 220px 1fr 50px;
     }
 
     @include for-narrow-layout {
-        grid-template-columns: 220px 980px 1fr;
+        grid-template-columns: 220px 1fr 50px;
+        // grid-template-columns: 220px 980px 1fr;
     }
 
     @include for-normal-layout {
-        grid-template-columns: 220px 1280px 1fr;
+        grid-template-columns: 220px 1fr 50px;
+        // grid-template-columns: 220px 1280px 1fr;
     }
 
     @include for-wide-layout {
-        grid-template-columns: 220px 1440px 1fr;
+        grid-template-columns: 220px 1fr 50px;
     }
 
     @include for-ultra-wide-layout {
-        grid-template-columns: 220px 1780px 1fr;
+        grid-template-columns: 220px 1fr 50px;
     }
 }
 

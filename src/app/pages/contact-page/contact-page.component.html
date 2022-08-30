@@ -1,9 +1,13 @@
 <section class="contact-page main-layout full">
-    <div class="contact-page__inner flex-column-center">
-        <div class="container">
-            <h3>Find someone to trade with</h3>
-            <a routerLink="/edit">Add new contact</a>
-            <contact-filter></contact-filter>
+    <div class="contact-page__inner">
+        <h2>My contacts</h2>
+        <div class="container flex flex-column">
+            <section class="filter-container flex">
+                <contact-filter></contact-filter>
+                <a routerLink="/edit" class="flex-column-center">
+                    <span>+ Add new contact</span>
+                </a>
+            </section>
             <contact-list [contacts]="contacts$ | async"></contact-list>
         </div>
     </div>

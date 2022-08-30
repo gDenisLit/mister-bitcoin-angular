@@ -1,17 +1,26 @@
-<header class="app-header">
-    <section class="app-header__inner flex items-center justify-between">
-        <div class="logo-wrapper flex items-center">
-            <!-- <img src={logo} alt=""/> -->
-            <h2>MISTER BTC</h2>
-        </div>
+<header class="app-header main-layout full">
+    <section class="app-header__inner flex items-center">
         <div *ngIf="loggedInUser">
             <a *ngIf="!loggedInUser._id" class="header-link login-link" routerLink="/login">Login</a>
             <a *ngIf="loggedInUser._id" class="header-link login-link" routerLink="/" (click)="onLogout()">Logout</a>
         </div>
         <nav class="nav-wrapper flex flex-column">
-            <a class="header-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >Overview</a>
-            <a class="header-link" routerLink="/contact" routerLinkActive="active">Contacts</a>
-            <a class="header-link" routerLink="/statistic" routerLinkActive="active">Statistics</a>
-        </nav >
+            <div class="logo-wrapper flex items-center">
+                <img src="../../../favicon.ico" alt=""/>
+                <h2>MISTER BTC</h2>
+            </div>
+            <a class="header-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <fa-icon [icon]="faHouse"></fa-icon>
+                <span>Overview</span>
+            </a>
+            <a class="header-link" routerLink="/contact" routerLinkActive="active">
+                <fa-icon [icon]="faAddressCard"></fa-icon>
+                <span>Contacts</span>
+            </a>
+            <a class="header-link" routerLink="/statistic" routerLinkActive="active">
+                <fa-icon [icon]="faChartArea"></fa-icon>
+                <span>Statistics</span>
+            </a>
+        </nav>
     </section>
 </header>
